@@ -32,10 +32,17 @@ $listeusers | ForEach-Object {
     $colObjUsers += Create-ObjUser -prenom $_.prenom -nom $_.nom -idrh $_.idrh -service $_.service
 }
 
+# Création des OU
+New-ADOrganizationalUnit "_Services"
+($colObjUsers | sort service -Unique).service | %{
+    New-ADOrganizationalUnit -path "OU=_Services,DC=frxlab,DC=local" -Name $_
+}
 
+# Création des utilisateurs
 $colObjUsers | ForEach-Object {$cpt = 1}{
     write-progress -Activity $_.'nom complet' -PercentComplete (100*$cpt++ / $colObjUsers.Count)
     new-aduser `
+      -path              ("OU=$($_.service),OU=_Services,DC=frxlab,DC=local") `
       -name              $_.idrh `
       -samaccountname    $_.idrh `
       -Surname           $_.nom `
