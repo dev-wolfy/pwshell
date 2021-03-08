@@ -1,0 +1,20 @@
+function Create-ObjUser{
+    param($prenom,$nom, $domaine = "frxlab.fr")
+    $ObjUser = new-object system.object
+    $ObjUser | Add-Member -MemberType NoteProperty -name "prenom"      -value ($prenom.Substring(0,1).toupper() + $prenom.Substring(1).ToLower())
+    $ObjUser | add-member -MemberType NoteProperty -name "nom"         -value ($nom.ToUpper())
+    $ObjUser | add-member -MemberType NoteProperty -name "nom complet" -value ($objuser.prenom + " "+ $objuser.nom)
+    $ObjUser | add-member -MemberType NoteProperty -name "pnom"        -value (($objuser.prenom.substring(0,1)+$objuser.nom).replace(" ",""))
+    $ObjUser | add-member -MemberType NoteProperty -name "initiales"   -value ($objuser.prenom.substring(0,1)+$objuser.nom.Substring(0,1))
+    $ObjUser | add-member -MemberType NoteProperty -name "trigramme"   -value (($objuser.prenom.substring(0,1)+$objuser.nom.Substring(0,1)+$objuser.nom[-1]).toupper())
+    $ObjUser | add-member -MemberType NoteProperty -name "email"       -value (($objuser.prenom.substring(0,1)+$objuser.nom+"@"+$domaine).replace(" ","").tolower())
+    return $ObjUser
+}
+
+$colObjUsers = @()
+$path = "C:\temp\users.txt"
+$listeusers = import-csv -Path $path -Encoding UTF7
+$listeusers | ForEach-Object {
+    $colObjUsers += Create-ObjUser -prenom $_.prenom -nom $_.nom 
+}
+$colObjUsers | Out-GridView
