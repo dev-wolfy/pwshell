@@ -1,6 +1,11 @@
 # pwshell
-cript powershell
-```ps
+script powershell
+
+```ps1
+get-aduser -filter * -Properties whencreated | where whencreated -gt (get-date).AddMinutes(-10) | remove-aduser
+```
+
+```ps1
 $adapter = get-netadapter | where {$_.status -eq "up" -and $_.mediatype -eq "802.3"}
 new-netipaddress -InterfaceIndex $adapter.ifIndex -IPAddress 192.168.1.10 -PrefixLength 24 -DefaultGateway 192.168.1.1
 set-DnsClientServerAddress -InterfaceIndex $adapter.ifIndex -ServerAddresses 192.168.90.55
