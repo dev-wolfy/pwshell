@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  (c) 2010 Microsoft Corporation  -->
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="console" namespace="Microsoft.Policies.console" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+  </policyNamespaces>
+  <resources minRequiredRevision="1.0" />
+  <categories>
+    <category name="console_Msg" displayName="$(string.console_Msg)">
+      <parentCategory ref="windows:System" />
+    </category>
+  </categories>
+  <policies>
+    <policy name="screenColors" class="User" displayName="$(string.screenColors)" explainText="$(string.screenColors_Help)" presentation="$(presentation.screenColors)" key="console">
+      <parentCategory ref="console_Msg" />
+      <supportedOn ref="windows:SUPPORTED_Win2k" />
+      <elements>
+        <enum id="screenColorsStyle" valueName="screenColors" required="true">
+          <item displayName="$(string.screenColors_rouge)">
+            <value>
+              <decimal value="244" />
+            </value>
+          </item>
+          <item displayName="$(string.screenColors_vert)">
+            <value>
+              <decimal value="242" />
+            </value>
+          </item>
+          <item displayName="$(string.screenColors_bleu)">
+            <value>
+              <decimal value="249" />
+            </value>
+          </item>
+        </enum>
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

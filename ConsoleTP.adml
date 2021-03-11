@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--  (c) 2010 Microsoft Corporation  -->
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <displayName>Paramètres de stratégie de groupe de la couleur du CMD</displayName>
+  <description>Affiche une liste déroulante proposant 3 couleurs de police</description>
+  <resources>
+    <stringTable>
+      <string id="console_Msg">Console invite de commande CMD</string>
+      <string id="console_User">Couleur de police de l'invité de commande</string>
+      <string id="screenColors">Choix de la couleur de police CMD</string>
+      <string id="screenColors_Help">Choisir dans la liste une couleur. Cette couleur sera la police de l'invité de comande CMD</string>
+      <string id="screenColors_rouge">rouge</string>
+      <string id="screenColors_vert">vert</string>
+      <string id="screenColors_bleu">bleu</string>
+    </stringTable>
+    <presentationTable>
+    	<presentation id="screenColors">
+    		<text>Exemple : choisir vert pour une console CMD avec une police verte</text>
+    		<dropdownList refId="screenColorsStyle" defaultItem="0">Choix de la couleur :</dropdownList>
+    	</presentation>
+   	</presentationTable>
+  </resources>
+</policyDefinitionResources>
